@@ -84,6 +84,3 @@ namespace FirstWebAPILink.Models
         }
     }
 }
-
-has context menu
-Compose

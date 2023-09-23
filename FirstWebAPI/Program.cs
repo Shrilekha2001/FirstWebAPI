@@ -1,4 +1,5 @@
 using FirstWebAPI.Models;
+using FirstWebAPILink.Models;
 using Microsoft.EntityFrameworkCore;
 using System.Text.Json.Serialization;
 

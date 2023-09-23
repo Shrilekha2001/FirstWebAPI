@@ -78,8 +78,8 @@ namespace WebApiClientConsole
                 var buffer = Encoding.UTF8.GetBytes(myContent);
                 var byteContent = new ByteArrayContent(buffer);
                 byteContent.Headers.ContentType = new MediaTypeHeaderValue("application/json");
-                //[HttpPut]
-                HttpResponseMessage response = await client.PutAsync("AddnewEmployee", byteContent);
+                //[HttpPost]
+                HttpResponseMessage response = await client.PostAsync("AddEmployee", byteContent);
                 response.EnsureSuccessStatusCode();
                 if (response.IsSuccessStatusCode)
                 {
@@ -89,7 +89,7 @@ namespace WebApiClientConsole
 
             }
         }
-        public static async Task UpdateEmployee(int Id)
+        public static async Task UpdateEmployee(int id)
         {
             using (var client = new HttpClient())
             {
@@ -99,9 +99,9 @@ namespace WebApiClientConsole
                 EmpViewModel employee = new EmpViewModel()
                 {
                     FirstName = "Shri",
-                    LastName = "Lekha",
+                    LastName = "Devi",
                     City = "Chennai",
-                    BirthDate = new DateTime(2001, 01, 01),
+                    BirthDate = new DateTime(2002, 01, 01),
                     HireDate = new DateTime(2023, 06, 16),
                     Title = "Manager"
                 };
@@ -110,8 +110,8 @@ namespace WebApiClientConsole
                 var buffer = Encoding.UTF8.GetBytes(myContent);
                 var byteContent = new ByteArrayContent(buffer);
                 byteContent.Headers.ContentType = new MediaTypeHeaderValue("application/json");
-                //[HttpPost]
-                HttpResponseMessage response = await client.PostAsync($"ModifyEmployees?{Id}", byteContent);
+                //[HttpPut]
+                HttpResponseMessage response = await client.PutAsync($"ModifyEmployee?{id}", byteContent);
                 response.EnsureSuccessStatusCode();
                 if (response.IsSuccessStatusCode)
                 {
@@ -120,8 +120,32 @@ namespace WebApiClientConsole
 
             }
         }
+        public static async Task DeleteEmployee(int Id)
+        {
+            using (var client = new HttpClient())
+            {
+                client.BaseAddress = uri;
+
+
+
+                client.DefaultRequestHeaders.Accept.Add(new System.Net.Http.Headers.MediaTypeWithQualityHeaderValue("application/json"));
+
+
+
+
+
+                //HttpDelete:
+                HttpResponseMessage response = await client.DeleteAsync($"DeleteEmployee?{Id}");
+                response.EnsureSuccessStatusCode();
+                if (response.IsSuccessStatusCode)
+                {
+                    await Console.Out.WriteLineAsync(response.StatusCode.ToString());
+                }
+            }
+        }
     }
 }
+
 
                     
             
